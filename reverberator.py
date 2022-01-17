@@ -6,10 +6,7 @@ Call the class SchroederReverberator() to process audio signals as numpy arrays.
 '''
 
 import numpy as np
-from IPython.display import Audio
-import soundfile as sf
 import scipy.signal as sp
-
 
 class CombFilter():
 
@@ -29,7 +26,7 @@ class CombFilter():
 
         Returns:
         --------
-        CombFilter
+        CombFilter()
             a new CombFilter object
 
         '''
@@ -93,7 +90,7 @@ class AllPassFilter():
 
         Returns:
         --------
-        AllPassFilter
+        AllPassFilter()
             a new AllPassFilter object
 
         '''
@@ -120,7 +117,6 @@ class AllPassFilter():
 
         Notes:
         ------
-
         This filtering implementation is based on the IIR linear filter implementation from SciPi.
         More information can be found at: https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.signal.lfilter.html
         The arrays used for all-pass filtering are as follows:
@@ -146,14 +142,16 @@ class SchroederReverberator():
     ''' Processes mono signals using a digital signal processing pipeline.
     '''
 
-    def __init__(self, 
-                sample_rate, 
-                amount=0.5, 
-                num_combs=4, 
-                comb_dampening=0.5, 
-                num_allpasses=2, 
-                allpass_attenuation=0.5, 
-                delay_times=[25, 30, 35, 40, 25, 50]):
+    def __init__(
+        self, 
+        sample_rate, 
+        amount=0.5, 
+        num_combs=4, 
+        comb_dampening=0.5, 
+        num_allpasses=2, 
+        allpass_attenuation=0.5, 
+        delay_times=[25, 30, 35, 40, 25, 50]
+        ):
     
         ''' Creates a new reverberator using a combination of comb and all-pass filters.
 
@@ -173,6 +171,11 @@ class SchroederReverberator():
             the amount of attenuation for the all-pass filters
         delay_times: list
             a list of the delay times in milliseconds for each filter, ordered combs first, then all-passes.
+        
+        Returns:
+        --------
+        SchroederReverberator()
+            a new SchroederReverberator object
 
         Example:
         --------
