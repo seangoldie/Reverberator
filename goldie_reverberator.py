@@ -1,5 +1,5 @@
-'''Basic Schroeder Reverberator 
-Author: Sean Goldie, smg8196@nyu.edu
+''' Basic Schroeder Reverberator 
+Author: Sean Goldie, goldie@nyu.edu
 Written for Advanced Musical Acoustics Summer 2021, NYU
 
 Call the class SchroederReverberator() to process audio signals as numpy arrays.
@@ -22,16 +22,13 @@ class CombFilter():
 
         Parameters:
         -----------
-
         delay_in_ms: int
             the delay in ms
-
         sample_rate: int
             the signal's sample rate
 
         Returns:
         --------
-
         CombFilter
             a new CombFilter object
 
@@ -47,10 +44,8 @@ class CombFilter():
 
         Parameters:
         -----------
-
         x: np.array
             the audio signal being processed
-
         dampening_coefficient: float
             the amount of dampening to use, a float between 0 and 1.
 
@@ -61,7 +56,6 @@ class CombFilter():
 
         Notes:
         ------
-
         This filtering implementation is based on the IIR linear filter implementation from SciPi.
         More information can be found at: https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.signal.lfilter.html
         The arrays used for comb filtering are as follows:
@@ -88,20 +82,17 @@ class AllPassFilter():
 
     def __init__(self, delay_in_ms, sample_rate):
         
-        '''Constructs a new AllPassFilter object.
+        ''' Constructs a new AllPassFilter object.
 
         Parameters:
         -----------
-
         delay_in_ms: int
             the delay in ms
-
         sample_rate: int
             the signal's sample rate
 
         Returns:
         --------
-
         AllPassFilter
             a new AllPassFilter object
 
@@ -117,10 +108,8 @@ class AllPassFilter():
 
         Parameters:
         -----------
-
         x: np.array
             the audio signal being processed
-
         attenuation_coefficient: float
             the amount of all-pass attenuation to use, a float between 0 and 1.
 
@@ -154,9 +143,8 @@ class AllPassFilter():
 
 
 class SchroederReverberator():
-    ''' Processes mono signals using a signal processing pipeline.
+    ''' Processes mono signals using a digital signal processing pipeline.
     '''
-
 
     def __init__(self, 
                 sample_rate, 
@@ -171,53 +159,45 @@ class SchroederReverberator():
 
         Parameters:
         -----------
-
         sample_rate: int
             the sample rate to use when initializing the reverberator (to convert delay times to sample delays)
-
         amount: float
             the dry/wet amount to use when initializing the reverberator, a float between 0 and 1
-
         num_combs: int
             the number of comb filters this reverberator should use in its signal processing pipeline
-
         comb_dampening: float
             the amount of dampening for the comb filters
-        
         num_allpasses: int
             the number of all-pass filters this filter should use in its signal processing pipeline
-
         allpass_attenuation: float
             the amount of attenuation for the all-pass filters
-
         delay_times: list
             a list of the delay times in milliseconds for each filter, ordered combs first, then all-passes.
 
         Example:
         --------
+        >>> amount = 0.5
+        >>> num_combs = 4
+        >>> comb_dampening = 0.25
+        >>> num_allpasses = 2
+        >>> allpass_attenuation = 0.5
+        >>> delay_times = [
+        ...     20, # Comb 1
+        ...     30, # Comb 2
+        ...     40, # Comb 3
+        ...     50, # Comb 4
+        ...     25, # All-pass 1
+        ...     50  # All-pass 2
+        ... ]
 
-            amount = 0.5
-            num_combs = 4
-            comb_dampening = 0.25
-            num_allpasses = 2
-            allpass_attenuation = 0.5
-            delay_times = [
-                20, # Comb 1
-                30, # Comb 2
-                40, # Comb 3
-                50, # Comb 4
-                25, # All-pass 1
-                50  # All-pass 2
-            ]
-
-            reverberator = SchroederReverberator(
-                amount,
-                num_combs,
-                comb_dampening,
-                num_allpasses,
-                allpass_attenuation,
-                delay_times
-            )
+        >>> reverberator = SchroederReverberator(
+        ...     amount,
+        ...     num_combs,
+        ...     comb_dampening,
+        ...     num_allpasses,
+        ...     allpass_attenuation,
+        ...     delay_times
+        ... )
 
         '''
 
@@ -242,41 +222,38 @@ class SchroederReverberator():
 
         Parameters:
         -----------
-        
         x: np.array
             the audio signal to process
 
         Returns:
         --------
-
         np.array
             the processed audio signal
 
         Example:
         --------
-
         # Load up a file, separate left and right channels
-        x, sample_rate = soundfile.load("SomeFile.wav", sr=None)
-        x_l = x[:,0]
-        x_r = x[:,1]
+        >>> x, sample_rate = soundfile.load("SomeFile.wav", sr=None)
+        >>> x_l = x[:,0]
+        >>> x_r = x[:,1]
 
-        reverberator = SchroederReverberator(
-            amount,
-            num_combs,
-            comb_dampening,
-            num_allpasses,
-            allpass_attenuation,
-            delay_times
-        )
+        >>> reverberator = SchroederReverberator(
+        ...     amount,
+        ...     num_combs,
+        ...     comb_dampening,
+        ...     num_allpasses,
+        ...     allpass_attenuation,
+        ...     delay_times
+        ... )
 
-        y_l = reverberator.process_buffer(x_l)
-        y_r = reverberator.process_buffer(x_r)
+        >>> y_l = reverberator.process_buffer(x_l)
+        >>> y_r = reverberator.process_buffer(x_r)
 
-        soundfile.write(
-            "SomeFileProcessed.wav", 
-            [y_l,y_r], 
-            rate=sample_rate
-        )
+        >>> soundfile.write(
+        ...     "SomeFileProcessed.wav", 
+        ...     [y_l,y_r], 
+        ...     rate=sample_rate
+        ... )
 
         '''
 
