@@ -10,7 +10,7 @@ reverberator.py contains code for CombFilter(), AllPassFilter(), and SchroederRe
 and use them to process Numpy arrays like so:
 ```
 # Load up a file, separate left and right channels
-x, sample_rate = soundfile.load("SomeFile.wav", sr=None)
+x, sample_rate = soundfile.read("SomeFile.wav")
 x_l = x[:,0]
 x_r = x[:,1]
 

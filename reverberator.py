@@ -236,7 +236,7 @@ class SchroederReverberator():
         Example:
         --------
         # Load up a file, separate left and right channels
-        >>> x, sample_rate = soundfile.load("SomeFile.wav", sr=None)
+        >>> x, sample_rate = soundfile.read("SomeFile.wav")
         >>> x_l = x[:,0]
         >>> x_r = x[:,1]
 
