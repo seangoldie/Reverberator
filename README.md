@@ -2,7 +2,7 @@
 
 **Author: Sean Goldie**
 
-A simple Schroeder reverberator for Python projects that processes monophonic sound. This code was written for the Advanced Musical Acoustics class at NYU, and therefore gives you lots of control over the parameters of the reverb such as to model different spaces. It could be easily adapted to work on stereo by splitting the left and right channels and processing them separately.
+A simple Schroeder reverberator for Python projects that processes monophonic sound. This code was written for the Advanced Musical Acoustics class at NYU, and therefore gives you lots of control over the parameters of the reverb so as to model different spaces. It could be easily adapted to work on stereo by splitting the left and right channels and processing them separately.
 
 ## Usage
 reverberator.py contains code for CombFilter(), AllPassFilter(), and SchroederReveberator() classes. Import them:
